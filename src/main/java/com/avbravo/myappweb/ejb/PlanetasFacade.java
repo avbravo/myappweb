@@ -13,7 +13,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 /**
- *
+ *use myappdb
  * @author avbravo
  */
 @Stateless

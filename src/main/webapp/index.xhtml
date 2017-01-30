@@ -12,6 +12,7 @@
     <h:body>
         <f:view >
             <h:form id="form">
+                <h1>Planetas con jmoordb(MongoDB)</h1>
                 <p:messages id="messages"/>
                 <p:panelGrid columns="2">
                     <p:outputLabel value="idplaneta"/>
@@ -19,31 +20,23 @@
                     <p:outputLabel value="planeta"/>
                     <p:inputText value="#{planetasController.planetas.planeta}"/>
 
-                    <p:commandButton value="Guardar" action="#{planetasController.save()}" update=":form:messages, :form:planetasDataTable"/>
+                    <p:commandButton value="Guardar" action="#{planetasController.save()}" 
+                                     update=":form:messages, :form:planetasDataTable"/>
 
                 </p:panelGrid>
                 <p:dataTable id="planetasDataTable" var="item" 
                              value="#{planetasController.planetasList}" 
 
                              rowsPerPageTemplate="5,10,15" emptyMessage="No hay registros" reflow="true">
-                    <f:facet name="header">
-                       
-                    </f:facet>
-
-                
-
-                    <p:column headerText="idplaneta" filterBy="#{item.idplaneta}"  >
+               
+                    <p:column headerText="idplaneta"   >
                         <h:outputText value="#{item.idplaneta}" />
-
                     </p:column>
-                    <p:column headerText="planeta" filterBy="#{item.planeta}" >
+                    <p:column headerText="planeta"  >
                         <h:outputText value="#{item.planeta}" />
                     </p:column>
-
                 </p:dataTable>
 
-
-              
 
 
             </h:form>

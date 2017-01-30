@@ -43,6 +43,7 @@ public class PlanetasController implements Serializable, IController {
     Printer printer;
 
     public List<Planetas> getPlanetasList() {
+        planetasList=planetasFacade.findAll();
         return planetasList;
     }
 
@@ -121,7 +122,9 @@ public class PlanetasController implements Serializable, IController {
         try {
             System.out.println("======================================");
             System.out.println("pĺanetas: "+planetas.toString());  
+            System.out.println("invocare el find()");
             Planetas t = planetasFacade.find("idplaneta", planetas.getIdplaneta());
+            System.out.println("invoque el find()");
             if (t == null) {
                 System.out.println("voy a guardar");
                 if (planetasFacade.save(planetas)) {
