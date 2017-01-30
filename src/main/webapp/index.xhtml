@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+
+    <h:body>
+        <f:view >
+            <h:form id="form">
+                <p:messages id="messages"/>
+                <p:panelGrid columns="2">
+                    <p:outputLabel value="idplaneta"/>
+                    <p:inputText value="#{planetasController.planetas.idplaneta}"/>
+                    <p:outputLabel value="planeta"/>
+                    <p:inputText value="#{planetasController.planetas.planeta}"/>
+
+                    <p:commandButton value="Guardar" action="#{planetasController.save()}" update=":form:messages, :form:planetasDataTable"/>
+
+                </p:panelGrid>
+                <p:dataTable id="planetasDataTable" var="item" 
+                             value="#{planetasController.planetasList}" 
+
+                             rowsPerPageTemplate="5,10,15" emptyMessage="No hay registros" reflow="true">
+                    <f:facet name="header">
+                       
+                    </f:facet>
+
+                
+
+                    <p:column headerText="idplaneta" filterBy="#{item.idplaneta}"  >
+                        <h:outputText value="#{item.idplaneta}" />
+
+                    </p:column>
+                    <p:column headerText="planeta" filterBy="#{item.planeta}" >
+                        <h:outputText value="#{item.planeta}" />
+                    </p:column>
+
+                </p:dataTable>
+
+
+              
+
+
+            </h:form>
+        </f:view>
+    </h:body>
+
+</html>
+
