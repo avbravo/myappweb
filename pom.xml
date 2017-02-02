@@ -4,7 +4,7 @@
 
     <groupId>com.avbravo</groupId>
     <artifactId>myappweb</artifactId>
-    <version>0.1.8</version>
+    <version>0.1.9</version>
     <packaging>war</packaging>
 
     <name>myappweb</name>
@@ -19,7 +19,7 @@
         <dependency>
             <groupId>com.github.avbravo</groupId>
             <artifactId>jmoordb</artifactId>
-            <version>0.1.8</version>
+            <version>0.1.9</version>
         </dependency>
 <!--        <dependency>
             <groupId>${project.groupId}</groupId>

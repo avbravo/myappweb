@@ -14,6 +14,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
@@ -85,16 +86,16 @@ public class PlanetasController implements Serializable, IController {
             String id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
 
             if (id != null) {
-                planetas = planetasFacade.find("idplaneta", id);
+                Optional<Planetas> p = planetasFacade.find("idplaneta", id);
+                if(p.isPresent()){
+                    planetas=p.get();
+                }
 
             }
             planetasList = new ArrayList<>();
             planetasFiltered = new ArrayList<>();
             planetasList = planetasFacade.findAll();
-            System.out.println("----> listado" +planetasList.size());
-            for(Planetas p:planetasList){
-                System.out.println(p.toString());
-            }
+
         } catch (Exception e) {
             JsfUtil.addErrorMessage("init() " + e.getLocalizedMessage());
         }
@@ -120,37 +121,22 @@ public class PlanetasController implements Serializable, IController {
     @Override
     public String save() {
         try {
-            System.out.println("======================================");
-            System.out.println("pĺanetas: "+planetas.toString());  
-            System.out.println("invocare el find()");
-            Planetas t = planetasFacade.find("idplaneta", planetas.getIdplaneta());
-            System.out.println("invoque el find()");
-            if (t == null) {
-                System.out.println("voy a guardar");
+
+           Optional<Planetas> p = planetasFacade.find("idplaneta", planetas.getIdplaneta());
+   
+            if (!p.isPresent()) {
+          
                 if (planetasFacade.save(planetas)) {
              JsfUtil.addSuccessMessage("Guardado");
                 } else {
                   JsfUtil.addSuccessMessage("No se pudo guardar " + planetasFacade.getException().toString());
                 }
             } else {
-                System.out.println("t "+t.toString());
+              
                JsfUtil.addSuccessMessage("Ya existe un planeta con ese idplaneta");
 
             }
-//            System.out.println(">>>>planetas "+planetas.toString());
-//            Planetas t =  planetasFacade.find("idplaneta",planetas.getIdplaneta());
-//            System.out.println("paso 1");
-//          System.out.println("t "+t.toString());
-//            if (t != null) {
-//                JsfUtil.warningDialog("Mensaje", "Existe un planeta con ese id");
-//                return null;
-//            }
-
-//            if (planetasFacade.save(planetas)) {
-//                JsfUtil.addSuccessMessage("Guardado");
-//            } else {
-//                JsfUtil.addSuccessMessage("save() " + planetasFacade.getException().toString());
-//            }
+ 
         } catch (Exception e) {
             JsfUtil.addErrorMessage("save()" + e.getLocalizedMessage());
         }
